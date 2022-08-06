@@ -1,0 +1,105 @@
+use('test')
+db.coleccion.find()
+
+db.createCollection("coleccion");
+// 1 - Insira os seguintes livros:
+
+use('test')
+db.coleccion.insertMany([
+  { 'Nome': 'DUNA',  'autor': 'FRANK HEBERT', 
+    'genero': 'FICÇÃO', 'ano': 1965, 'ISBN': "9788576571018"},
+
+  {'Nome': 'DOM CASMURRO',  'autor': 'MACHADO DE ASSIS', 
+    'genero': 'FICÇÃO', 'ano': 1899 , 'ISBN': "9788508153619" },
+
+  { 'Nome': 'O SOL É PARA TODOS',  'autor': 'HARPER LEE', 
+  'genero': 'FIÇÃO', 'ano': 1960, 'ISBN': "9722906836"},
+
+  {'Nome': 'COSMOS',  'autor': 'CARL SAGAN', 
+    'genero': 'NÃO-FICÇÃO', 'ano': 1980, 'ISBN': "9780345539434" },
+
+  {'Nome': 'UMA BREVE HISTÓRIA DO TEMPO',  'autor': 'STEPHEN HAWKING', 
+    'genero': 'NÃO-FICÇÃO ', 'ano': 1988, 'ISBN': "9726620104" },
+
+  {'Nome': 'DEVORADORES DE ESTRELAS ',  'autor': 'ANDY WEIR', 
+    'genero': 'FICÇÃO', 'ano': 2021, 'ISBN': "9780593395561" }
+]);
+ 
+   use('test')
+   db.coleccion.find()
+
+   // 2-  Consulte na coleccion el livro "Cosmos"
+   use('test')
+   db.coleccion.find(
+{ Nome: "COSMOS" })
+
+// 3- Consulte os livros lançados antes de 1979.
+   use('test')
+   db.coleccion.find({ ano : { $lt: 1979 } })
+
+   // 4 - Consulte os livros cujo ano não seja 1960.
+
+   use('test')
+   db.coleccion.find({ ano : { $not: { $eq : 1960 } }})
+
+
+// 5 - Insira o seguinte livro:
+use('test')
+db.coleccion.insertOne(  
+  {'Nome': '1984',  'autor': 'GEORGE ORWELL', 
+    'genero': 'FICÇÃO', 'ano': 1949, 'ISBN': "978-8535914849" })
+
+// 6 - Consulte todos os livros que começam com a letra "D".
+use('test')
+db.coleccion.find({Nome:{$regex:/^D/}})
+
+7 - // Consulte todos os livros que terminam com a letra "S" (Está malo, revisar)
+use('test')
+db.coleccion.find({Nome:{$regex:/S$/}})
+
+// 8 - Consulte todos os livros cujo ISBN termina com "-4".
+use('test')
+db.coleccion.find({'ISBN': {$regex: "4$"}})
+
+// 9-  Atualize o nome do livro "DEVORADORES DE ESTRELAS" para "PROJECT HAIL MARY"
+
+use('test')
+db.coleccion.updateOne({ 'Nome': "DEVORADORES DE ESTRELAS"},
+{ $set: { 'Nome': "PROJECT HAIL MARY"}})
+
+// - 10 Exclua o livro "1984".
+use('test')
+db.coleccion.deleteOne({"_id": 
+ObjectId("62ec5a7b4db2ef0cb5796e23")});
+
+
+
+
+   //comandos para ayuda en el ejercicio.
+
+/* 1- comando que sirve para eliminar base de datos.
+use('Mongofb')
+db.dropDatabase('Mongofb')
+
+2- Comando que sirve para eliminar una coleccion:
+use('test')
+db.coleccion.drop()
+
+3- Comando para eliminar solamente un registro de una coleccion:
+db.coleccion.deleteOne({"_id": ObjectId("62ec4e6d9688466268fc505c")});
+Ejemplo ilustrativo
+
+
+4-Comando que sirve para inserir un dato en una coleccion
+use('test')
+db.coleccion.insertOne(  
+  {'Nome': 'El titanic ',  'autor': 'josé', 
+    'genero': 'FICÇÃO', 'ano': 2021, 'ISBN': "123138923" })
+
+    5- Comando para listar colecciones: show dbs
+
+     */
+
+     
+
+     
